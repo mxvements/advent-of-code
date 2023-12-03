@@ -6,14 +6,14 @@
 /*   By: lmmielgo <lmmielgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 09:25:21 by luciama2          #+#    #+#             */
-/*   Updated: 2023/12/03 17:38:33 by lmmielgo         ###   ########.fr       */
+/*   Updated: 2023/12/03 19:43:27 by lmmielgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <ctype.h>
 #include <string.h>
-#include "./gnl/get_next_line.h"
+#include "../ft_get_next_line/get_next_line.h"
 
 void	arrbzero(int nbr[], int len)
 {
