@@ -1,18 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   day02-pt1.c                                        :+:      :+:    :+:   */
+/*   day02-pt2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lmmielgo <lmmielgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 19:33:59 by luciama2          #+#    #+#             */
-/*   Updated: 2023/12/03 21:40:41 by lmmielgo         ###   ########.fr       */
+/*   Updated: 2023/12/03 22:11:25 by lmmielgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <ctype.h>
 #include <string.h>
+#include <limits.h>
 #include "../ft_get_next_line/get_next_line.h"
 
 int	main(void)
@@ -30,9 +31,14 @@ int	main(void)
 	int blue = 0;
 	//SUM OF POSSIBLE LINES
 	int	id = 0;
-	int possibles = 0;
 	//
 	int i;
+	//PART2
+	int redmin = 0;
+	int greenmin = 0;
+	int bluemin = 0;
+	int power = 0;
+	int sumpower = 0;
 	
 
 	fd = open("puzzle-input", O_RDONLY);
@@ -50,6 +56,10 @@ int	main(void)
 		red = 0;
 		green = 0;
 		blue = 0;
+		
+		redmin = 0;
+		greenmin = 0;
+		bluemin = 0;
 		while (gnl[++i] != '\0')
 		{
 			//reset data on red, green and blue cubes
@@ -67,6 +77,8 @@ int	main(void)
 					red += gnl[i - 2] - '0';
 				if (isdigit(gnl[i - 3]) != 0)
 					red += ((gnl[i - 3] - '0') * 10);
+				if (red > redmin)
+					redmin = red;
 			}
 			//green
 			if (gnl[i] == 'g' && gnl[i - 1] == ' ')
@@ -75,6 +87,8 @@ int	main(void)
 					green += gnl[i - 2] - '0';
 				if (isdigit(gnl[i - 3]) != 0)
 					green += ((gnl[i - 3] - '0') * 10);
+				if (green > greenmin)
+					greenmin = green;
 			}
 			//blue
 			if (gnl[i] == 'b' && gnl[i - 1] == ' ')
@@ -83,16 +97,15 @@ int	main(void)
 					blue += gnl[i - 2] - '0';
 				if (isdigit(gnl[i - 3]) != 0)
 					blue += ((gnl[i - 3] - '0') * 10);
+				if (blue > bluemin)
+					bluemin = blue;
 			}
 
-			//if any of the numbers is > to the limit, break loop on line
-			if (red > redmax || green > greenmax || blue > bluemax)
-				break;
-
-			//if next is EOL, then the game is possible
+			//if next is EOL, then set the power
 			if (gnl[i + 1] == '\0')
 			{
-				possibles += id;
+				power = redmin * greenmin * bluemin;
+				sumpower += power;
 				break;
 			}
 		}
@@ -102,7 +115,7 @@ int	main(void)
 	}
 	close(fd);
 
-	printf("%d\n", possibles);
+	printf("%d\n", sumpower);
 	
 	return (0);
 }
