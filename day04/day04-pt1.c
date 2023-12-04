@@ -41,15 +41,17 @@ int istrchr(char *s, char c)
 int	getlinepts(char  *line)
 {
 	int count = 0;
-	int winnbr[10];
-	int nbr[25];
+	int windim = 10; //5 for test, 10 for puzzle
+	int nbrdim = 25; //8 for test, 25 for puzzle
+	int winnbr[windim];
+	int nbr[nbrdim];
 	int i;
 	int j;
 
 	//add winning nbrs to arr
 	i = 0;
 	j = istrchr(line, '|') - 3;
-	while (i < 10)
+	while (i < windim)
 	{
 		if (isdigit(line[j]) != 0)
 		{
@@ -65,7 +67,7 @@ int	getlinepts(char  *line)
 	//add nbrs to arr
 	i = 0;
 	j = istrchr(line, '|') + 2;
-	while (i < 25)
+	while (i < nbrdim)
 	{
 		if (isdigit(line[j]) != 0)
 		{
@@ -80,10 +82,10 @@ int	getlinepts(char  *line)
 
 	//compare arrays and get pts
 	i = 0;
-	while (i < 10)
+	while (i < windim)
 	{
 		j = 0;
-		while (j < 25)
+		while (j < nbrdim)
 		{
 			if (winnbr[i] == nbr[j])
 				count++;
