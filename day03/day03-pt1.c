@@ -71,16 +71,6 @@ int main(void)
 	text[i] = NULL;
 	close(fd);
 
-	/*
-	//PRINTARRAY
-	i = 0;
-	while (text[i] != NULL)
-	{
-		printf("%s", text[i]);
-		i++;
-	}
-	*/
-
 	//FIND NUMBERS SURROUNDED BY SYMBOLS
 	i = 0;
 	int sum = 0;
@@ -96,7 +86,7 @@ int main(void)
 				if (text[i - 1] != NULL)
 				{
 					if (isdigit(text[i - 1][j - 1]) != 0)
-					{
+					{ 
 						curr = getnbr(text, i - 1, j - 1);
 						if (curr != prev)
 						{
