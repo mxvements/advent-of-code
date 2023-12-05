@@ -6,7 +6,7 @@
 /*   By: lmmielgo <lmmielgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 09:25:21 by luciama2          #+#    #+#             */
-/*   Updated: 2023/12/03 19:43:27 by lmmielgo         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:30:22 by lmmielgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <string.h>
 #include "../ft_get_next_line/get_next_line.h"
 
-void	arrbzero(int nbr[], int len)
+void	arrbzero(int *nbr[], int len)
 {
 	int	i;
 
@@ -83,7 +83,7 @@ int	main(void)
 	fd = open("puzzle-input", O_RDONLY);
 	
 	i = 0;
-	arrbzero(nbr, len);
+	arrbzero(&nbr, len);
 	while (1)
 	{
 		gnl = get_next_line(fd);
