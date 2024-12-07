@@ -11,7 +11,8 @@ def read_input(filepath):
 	return test_values, ecuation_values
 
 def compute_expression(a, b):
-    result = a * 10 ** math.ceil(math.log10(b)) + b #int(str(root) + str(next_val))
+    # result = a * 10 ** math.ceil(math.log10(b + 1)) + b #int(str(root) + str(next_val)), thanks reddit
+    result = a * 10 ** len(str(b)) + b
     return result
 
 def build_operations_tree(root, ecuation, idx, final_val):
