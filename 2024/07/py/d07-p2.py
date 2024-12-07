@@ -1,3 +1,5 @@
+import math
+
 def read_input(filepath):
 	test_values = []
 	ecuation_values =  []
@@ -8,6 +10,9 @@ def read_input(filepath):
 			ecuation_values.append(list(map(int, s[1].strip().split())))
 	return test_values, ecuation_values
 
+def compute_expression(a, b):
+    result = a * 10 ** math.ceil(math.log10(b)) + b #int(str(root) + str(next_val))
+    return result
 
 def build_operations_tree(root, ecuation, idx, final_val):
 	if idx >= len(ecuation):
@@ -16,6 +21,7 @@ def build_operations_tree(root, ecuation, idx, final_val):
 	operations = [
 		root + next_val,
   		root * next_val,
+		compute_expression(root, next_val) #new concatenation operation ERR CONCATENATNG LARGE NBR
 	]
 	if int(final_val) in operations:
 		return final_val
