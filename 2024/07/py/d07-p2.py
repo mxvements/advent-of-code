@@ -28,7 +28,7 @@ def build_operations_tree(root, ecuation, idx, final_val):
 		return final_val
 	for op_result in operations:
 		if op_result > int(final_val):
-			return 0
+			continue #skip this path
 		if op_result is not None:
 			if build_operations_tree(op_result, ecuation, idx + 1, final_val) == final_val:
 				return final_val
