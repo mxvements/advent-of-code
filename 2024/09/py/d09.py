@@ -8,55 +8,45 @@ def read_input(filepath):
 				if (line[i] == '\n'):
 					continue
 				if i % 2 == 0:
-					j = int(line[i]) 
-					while (j > 0):
-						mem_line.append(nbr)
-						j -= 1
-					nbr += 1 #what if number of multiple digits
+					mem_line += list([str(nbr) ]* int(line[i]))
+					nbr+=1
 				else:
-					mem_line += list(str('.') * int(line[i]))
+					mem_line += list([str('.')] * int(line[i]))
 			mem.append(mem_line)
 	return mem
 			
-def move_file_blocks(mem_line):
-	moved_mem_line = []
-	j = len(mem_line) - 1
+def move_file_blocks(mem: list):
+	while '.' in mem:
+		# with list.pop() we remove the last element of a list
+		# in each '.' we replace it with the last element of the list
+  		# unless the last element is a '.', which we remove
+		if (mem[-1] == '.'):
+			mem.pop()
+		else:
+			i = mem.index('.')
+			mem[i] = mem.pop()
+	return (mem)
 	
-	for i in range(0,len(mem_line)):
-		if (i > j):
-			moved_mem_line.append('.')
-		elif (str(mem_line[i]).isdigit()):
-			moved_mem_line.append(mem_line[i])
-		elif (mem_line[i] == '.' and j >= 0 and str(mem_line[j]).isdigit()):
-			# print(f"mem[i]: {mem_line[i]}")
-			# print(f"mem[j]: {mem_line[j]}")
-			moved_mem_line.append(mem_line[j])
-			j -= 1
-			if (mem_line[j] == '.'):
-				j -= 1
-    
-	return (moved_mem_line)
-	
+ 
+ 
+def checksum(mem_line):
+	csum = 0
+	for index, char in enumerate(mem_line):
+		csum += index * int(char) if char.isdigit() else 0
+	return csum
 
 def main():
-	filepath="../src/test.txt"
+	filepath="../src/puzzle.txt"
 	mem = read_input(filepath)
 	moved_mem = []
 	for i in range(len(mem)):
 		moved_mem.append(move_file_blocks(mem[i]))
 	
-	checksum = 0
-	for m_mem in moved_mem:
-		for i in range(len(m_mem)):
-			if str(m_mem[i]).isdigit():
-				print(f"m_mem[i]: {m_mem[i]}")
-				print(f"i: {i}")
-          
-				checksum += int(m_mem[i]) * i 
+	tchecksum = checksum(moved_mem[0])
 	
-	print(f"mem: {mem}")
-	print(f"moved_mem: {moved_mem}")
-	print(f"solution: {checksum}")
+	# print(f"mem: {mem}")
+	# print(f"moved_mem: {moved_mem}")
+	print(f"solution: {tchecksum}")
  
 
 if __name__ == "__main__":
